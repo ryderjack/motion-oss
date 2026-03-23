@@ -1,0 +1,82 @@
+/* Override BlockNote editor background to inherit from the app theme */
+.bn-editor {
+  padding-inline: 0 !important;
+  background-color: transparent !important;
+}
+
+/* Override BlockNote dark theme variables to match the app's design tokens */
+.bn-container[data-color-scheme="dark"] {
+  --bn-colors-editor-text: oklch(0.985 0 0);
+  --bn-colors-editor-background: transparent;
+  --bn-colors-menu-text: oklch(0.985 0 0);
+  --bn-colors-menu-background: oklch(0.205 0 0);
+  --bn-colors-tooltip-text: oklch(0.985 0 0);
+  --bn-colors-tooltip-background: oklch(0.145 0 0);
+  --bn-colors-hovered-text: oklch(0.985 0 0);
+  --bn-colors-hovered-background: oklch(0.269 0 0);
+  --bn-colors-selected-text: oklch(0.985 0 0);
+  --bn-colors-selected-background: oklch(0.145 0 0);
+  --bn-colors-disabled-text: oklch(0.556 0 0);
+  --bn-colors-disabled-background: oklch(0.269 0 0);
+  --bn-colors-border: oklch(1 0 0 / 10%);
+  --bn-colors-side-menu: oklch(0.556 0 0);
+  --bn-colors-shadow: oklch(0 0 0 / 30%);
+}
+
+/* Fix table borders in dark mode (hardcoded #ddd in BlockNote core) */
+.dark .bn-editor [data-content-type=table] th,
+.dark .bn-editor [data-content-type=table] td {
+  border-color: oklch(1 0 0 / 15%);
+}
+
+/* Fix file block background in dark mode (hardcoded #f2f1ee in core) */
+.dark .bn-editor [data-file-block] .bn-add-file-button {
+  background-color: oklch(0.269 0 0);
+  color: oklch(0.708 0 0);
+}
+.dark .bn-editor [data-file-block] .bn-file-name-with-icon:hover {
+  background-color: oklch(0.269 0 0);
+}
+
+/* Notion-style heading sizes */
+.bn-editor [data-content-type=heading] {
+  --level: 1.875em;
+}
+.bn-editor [data-content-type=heading][data-level="2"] {
+  --level: 1.5em;
+}
+.bn-editor [data-content-type=heading][data-level="3"] {
+  --level: 1.25em;
+}
+.bn-editor .bn-block-outer[data-prev-type=heading] > .bn-block > .bn-block-content {
+  font-size: var(--prev-level);
+}
+.bn-editor .bn-block-outer[data-prev-level="1"] {
+  --prev-level: 1.875em;
+}
+.bn-editor .bn-block-outer[data-prev-level="2"] {
+  --prev-level: 1.5em;
+}
+.bn-editor .bn-block-outer[data-prev-level="3"] {
+  --prev-level: 1.25em;
+}
+
+/* Remove selection ring from subpage blocks */
+.bn-editor [data-content-type=subpage].ProseMirror-selectednode,
+.bn-editor [data-content-type=subpage] .ProseMirror-selectednode,
+.bn-editor .bn-block-content[data-content-type=subpage] {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Match table text to subpage block styling */
+.bn-editor [data-content-type=table] td,
+.bn-editor [data-content-type=table] th {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.bn-editor [data-content-type=table] a {
+  font-weight: 700;
+  text-decoration: underline;
+}
