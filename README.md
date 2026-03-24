@@ -1,3 +1,5 @@
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/a792d2d0-76f6-4c80-bc26-a33fd9870c31" />
+
 # Motion
 
 An open-source, self-hostable workspace app inspired by Notion. Built with Next.js.
