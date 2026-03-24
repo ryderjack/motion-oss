@@ -48,12 +48,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const defaultWorkspaceId = process.env.DEFAULT_WORKSPACE_ID;
         if (defaultWorkspaceId) {
-          await supabase
+          const { data: existingMember } = await supabase
             .from("members")
-            .upsert(
-              { user_id: userId, workspace_id: defaultWorkspaceId, role: "EDITOR" },
-              { onConflict: "user_id,workspace_id" }
-            );
+            .select("id")
+            .eq("user_id", userId)
+            .eq("workspace_id", defaultWorkspaceId)
+            .single();
+
+          if (!existingMember) {
+            await supabase
+              .from("members")
+              .insert({ user_id: userId, workspace_id: defaultWorkspaceId, role: "EDITOR" });
+          }
         }
       }
       return token;
